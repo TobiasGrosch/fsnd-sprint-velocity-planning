@@ -40,6 +40,12 @@ class Developer(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def json_representation(self):
+        return {
+            'name': self.name,
+            'proj_participation': self.proj_participation
+        }
+
 class Sprint(db.Model):
     __tablename__ = 'sprints'
 
@@ -63,6 +69,18 @@ class Sprint(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+
+    def json_representation(self):
+        return {
+            'name': self.name,
+            'sp_planned': self.sp_planned,
+            'sp_finished': self.sp_finished,
+            'velocity_factor': self.velocity_factor,
+            'sp_prediction_next_sprint': self.sp_predicitions_next_sprint,
+            'sprint_fte_sum': self.sprint_fte_sum,
+            'date_start': self.date_start,
+            'date_end': self.date_end
+        }
 
 class Vacation(db.Model):
     __tablename__ = 'vacations'

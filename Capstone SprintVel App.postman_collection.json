@@ -1,0 +1,391 @@
+{
+	"info": {
+		"_postman_id": "08d62317-6272-4925-ac6c-0c339813642e",
+		"name": "Capstone SprintVel App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET /",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						""
+					]
+				},
+				"description": "Get Landing Page"
+			},
+			"response": []
+		},
+		{
+			"name": "GET /developers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{developer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/developers",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"developers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /sprints",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{scrum master}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/sprints",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"sprints"
+					]
+				},
+				"description": "Get all Sprints"
+			},
+			"response": []
+		},
+		{
+			"name": "POST /developers",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set('randomNumber', Math.floor(Math.random() * 10000));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{developer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Tobias {{randomNumber}}\",\n    \"proj_participation\": 0.5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/developers",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"developers"
+					]
+				},
+				"description": "POST new developer"
+			},
+			"response": []
+		},
+		{
+			"name": "POST /sprints",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set('randomNumber', Math.floor(Math.random() * 10000));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"2021-05-06\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{scrum master}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Sprint {{randomNumber}}\",\n    \"sp_planned\": 127,\n    \"sp_finished\": 99,\n    \"velocity_factor\": 0.89,\n    \"sp_prediction_next_sprint\": 105,\n    \"sprint_fte_sum\": 90,\n    \"date_start\": \"2021-04-16\",\n    \"date_end\": \"2021-05-06\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/sprints",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"sprints"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH /developers/1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.globals.set('randomNumber', Math.floor(Math.random() * 10000));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Tobias_changed\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{developer}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Tobias_changed {{randomNumber}}\",\n    \"proj_participation\": 0.505\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/developers/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"developers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /developers/2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"resource not found, Client error\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{scrum master}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/developers/100",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"developers",
+						"100"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ii1wSjduRi0xQXZsT3JSbjctT2FRNCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtZ3Jvc2NodC5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjA2NmM1MDkxODNhMmUwMDY5NGU2ZTBjIiwiYXVkIjoic3ByaW50X3ZlbCIsImlhdCI6MTYxOTA4MDgzNCwiZXhwIjoxNjE5MDg4MDM0LCJhenAiOiJIMFpUTThPOVhnNmZkVHUxV3U5T3BmMjlVemxMMkJmbCIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnNwcmludHMiLCJnZXQ6ZGV2ZWxvcGVycyIsImdldDpzcHJpbnRzIiwicG9zdDpkZXZlbG9wZXJzIiwicG9zdDpzcHJpbnRzIl19.bi7a9tH40SVqiMMyw7Phpc5MjiN6hyAQSQymXRGJrbRCgDylLbo4-K5LrChjwSo0sk5xdeMRuauVbjs6XrTq8Seumm5DidwGUys0Bx_JDQ6dH3-IBmHRz-Jktav8Uz6-rGQeyr7Rtoq1A0Saof2POe8w0_bvc2vMQZUwjhv23Dnahl4T-Y9sSlA-p3Bh0Q74JfW-5k7SoJepuPKibU-W3pm03vW81R9J4vRPCs_G6eq8vwgVBAOY4s_cuMJ5OL7ew3tar7yFNmWyGnr3-dju1ixaIaEGDarZ2tNevTlh1yjccsrDsiInpjHrG5YIBh4J1aP8-YaY5doUcJa9X-p1EA",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://0.0.0.0:8080/"
+		},
+		{
+			"key": "scrum master",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ii1wSjduRi0xQXZsT3JSbjctT2FRNCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtZ3Jvc2NodC5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjA2NmM1MDkxODNhMmUwMDY5NGU2ZTBjIiwiYXVkIjoic3ByaW50X3ZlbCIsImlhdCI6MTYxOTA5MjA1NywiZXhwIjoxNjE5MTc4NDU3LCJhenAiOiJIMFpUTThPOVhnNmZkVHUxV3U5T3BmMjlVemxMMkJmbCIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmRldmVsb3BlcnMiLCJkZWxldGU6c3ByaW50cyIsImdldDpkZXZlbG9wZXJzIiwiZ2V0OnNwcmludHMiLCJwb3N0OmRldmVsb3BlcnMiLCJwb3N0OnNwcmludHMiXX0.ErtikB_8tlMZzEEjgdeNxaxbpk2zZGTSIrIkUdykbD8SqTftq_e46mkE_DjnssoN7F93JC0lregZZE1hQSbtwLKXNkqcYI7Qd9yAJOFRX2EYmlEhqMhSVOpVKRJCfmlXWHuSCIfrxCbZc_S9ojRmQ-n5DR26UvIje58n79gr4HrfT3-A_JNOVqftOUOP6tDjp0C6XxRAob8BhPzdZVePdqxah3fiCdTbcEK8N-R8cPYIOE-pwEe_Sk5K5gjQdplVfeHYh6uN_gKjOAEbqrPCSyPWWvkoxG9lKujqUIIJDsEBN0xlVZ_qPcxlTrJOOi565pYUZcL4nfuuPV3bt6EhEg"
+		},
+		{
+			"key": "developer",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ii1wSjduRi0xQXZsT3JSbjctT2FRNCJ9.eyJpc3MiOiJodHRwczovL2ZzbmQtZ3Jvc2NodC5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjA2YzUwMjJjY2YwNDMwMDY5MjRlNzkwIiwiYXVkIjoic3ByaW50X3ZlbCIsImlhdCI6MTYxOTA5MjEzNywiZXhwIjoxNjE5MTc4NTM3LCJhenAiOiJIMFpUTThPOVhnNmZkVHUxV3U5T3BmMjlVemxMMkJmbCIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZ2V0OmRldmVsb3BlcnMiLCJnZXQ6c3ByaW50cyIsInBvc3Q6ZGV2ZWxvcGVycyJdfQ.DkrXbR02vfDdlDU0nOcHcgjU5qilbc-iD2JLX4Xy2DSh-QPmtz8sH0_vY-svKo_xEfWZdDmo1MvZuhrjADqqpyCuBih2sJGRA_ysSlf62aZNYxZMexnag0-nb1bvCeTo0ps9xKbL3sXg5r7Wa0Y7iwEyMZw3hG9_WJHlLEPAkCkC5Id-Z1e76V_aFXZ0RO8DKncaOblVTmB1xO0qqHzB75ePXA2sNhzM-cfr7_hVnphIIMkaiQveYlMCn0jzMUGuJYUcR7LeDqOIz9M7ir4K1MPS72cGwb1gvqRcPALDciN45x5AhkFqi3OelJxSwA_w589VbvFHF1oeDZoE1cSBYQ"
+		}
+	]
+}
