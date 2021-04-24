@@ -4,12 +4,14 @@ from flask_sqlalchemy import SQLAlchemy
 import json
 from flask_migrate import Migrate
 
-# works with heroku online db:  database_path = "postgresql://mbiwdaadknzeib:b6049ba04911e612b4f9a5555e21b7468f2033b1e554c729bf2599f606827649@ec2-18-206-20-102.compute-1.amazonaws.com:5432/d84bo7akva22br"
+# works with heroku online db:  
+
+database_path = "postgresql://mbiwdaadknzeib:b6049ba04911e612b4f9a5555e21b7468f2033b1e554c729bf2599f606827649@ec2-18-206-20-102.compute-1.amazonaws.com:5432/d84bo7akva22br"
 
 #database for local development:
 
-database_name = "velocity"
-database_path = "postgresql://postgres:postgres@localhost:5432/{}".format(database_name)
+#database_name = "velocity"
+#database_path = "postgresql://postgres:postgres@localhost:5432/{}".format(database_name)
 
 db = SQLAlchemy()
 
