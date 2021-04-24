@@ -15,7 +15,8 @@ def create_app(test_config=None):
   app.secret_key = os.getenv('SECRET_KEY')
 
   @app.route('/', methods=['GET'])
-  def index():
+  @requires_auth('get:developers')
+  def index(jwt):
     return '<h1> Welcome to the Sprint Velocity Planning Tool SprintVel! </h1>', 200
 
   @app.route('/developers', methods=['GET'])

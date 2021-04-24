@@ -42,6 +42,7 @@ class Developer(db.Model):
 
     def json_representation(self):
         return {
+            'id': self.id,
             'name': self.name,
             'proj_participation': self.proj_participation
         }
@@ -72,6 +73,7 @@ class Sprint(db.Model):
 
     def json_representation(self):
         return {
+            'id':self.id,
             'name': self.name,
             'sp_planned': self.sp_planned,
             'sp_finished': self.sp_finished,
