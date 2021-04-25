@@ -377,7 +377,7 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "http://0.0.0.0:8080/"
+			"value": "https://fsnd-sprint-velocity-planning.herokuapp.com/"
 		},
 		{
 			"key": "scrum master",
